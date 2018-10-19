@@ -45,4 +45,3 @@ hs_err_pid*
 .gitignore
 .idea/
 BMS-SSM-V2.iml
-src/
