@@ -45,5 +45,6 @@
         <td>18</td>
     </tr>
 </table>
+<a href="../user/logout.action">点击退出登录</a>
 </body>
 </html>

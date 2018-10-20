@@ -24,7 +24,7 @@ public class UserController {
     //    验证登录
     @RequestMapping("login")
     public String login(int uid, String password, HttpSession session) {
-
+        
         User user = this.userService.queryUserByUid(uid);
 
         if (user != null) {
@@ -39,5 +39,12 @@ public class UserController {
             return "redirect:/user/toLogin.action";
         }
 
+    }
+
+    //    退出登录
+    @RequestMapping("logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/user/toLogin.action";
     }
 }
