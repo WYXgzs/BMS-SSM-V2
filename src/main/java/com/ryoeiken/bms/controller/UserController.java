@@ -1,5 +1,8 @@
 package com.ryoeiken.bms.controller;
 
+import com.ryoeiken.bms.pojo.User;
+import com.ryoeiken.bms.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,6 +12,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("user")
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
     //    登录页面
     @RequestMapping("toLogin")
     public String toLogin() {
@@ -17,15 +23,21 @@ public class UserController {
 
     //    验证登录
     @RequestMapping("login")
-    public String login(Integer uid, String password, HttpSession session) {
-        System.out.println(uid);
-        System.out.println(password);
+    public String login(int uid, String password, HttpSession session) {
 
-        if (uid == 123456 && password.equals("admin")) {
-            session.setAttribute("uid", uid);
-            return "redirect:/book/list.action";
+        User user = this.userService.queryUserByUid(uid);
+
+        if (user != null) {
+            String userPassword = user.getPassword();
+            if (password.equals(userPassword)) {
+                session.setAttribute("uid", uid);
+                return "redirect:/book/list.action";
+            } else {
+                return "redirect:/user/toLogin.action";
+            }
         } else {
             return "redirect:/user/toLogin.action";
         }
+
     }
 }
