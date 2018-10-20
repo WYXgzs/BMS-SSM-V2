@@ -18,7 +18,9 @@ public class UserController {
     //    登录页面
     @RequestMapping("toLogin")
     public String toLogin(HttpSession session) {
-        if (session != null) {
+
+        Object uid = session.getAttribute("uid");
+        if (uid != null) {
             return "redirect:/book/list.action";
         }
         return "login";
