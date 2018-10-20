@@ -17,14 +17,17 @@ public class UserController {
 
     //    登录页面
     @RequestMapping("toLogin")
-    public String toLogin() {
+    public String toLogin(HttpSession session) {
+        if (session != null) {
+            return "redirect:/book/list.action";
+        }
         return "login";
     }
 
     //    验证登录
     @RequestMapping("login")
     public String login(int uid, String password, HttpSession session) {
-        
+
         User user = this.userService.queryUserByUid(uid);
 
         if (user != null) {
