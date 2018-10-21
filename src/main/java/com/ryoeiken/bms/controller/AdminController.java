@@ -45,6 +45,14 @@ public class AdminController {
         }
     }
 
+    //    退出登录
+    //    http://127.0.0.1/admin/logout.action
+    @RequestMapping("logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:http://127.0.0.1";
+    }
+
     //    管理页面
     //    http://127.0.0.1/admin/manage.action
     @RequestMapping("manage")
