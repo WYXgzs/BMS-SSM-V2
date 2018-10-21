@@ -24,4 +24,13 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/admin/toLogin.action"/>
+            <mvc:exclude-mapping path="/admin/login.action"/>
+            <bean class="com.ryoeiken.bms.interceptor.AdminLoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>
