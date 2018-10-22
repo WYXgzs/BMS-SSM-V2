@@ -11,7 +11,6 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
-
     @Override
     public Admin queryAdminByUsername(String username) {
         Admin admin = this.adminMapper.selectByPrimaryKey(username);

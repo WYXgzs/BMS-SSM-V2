@@ -19,6 +19,11 @@ public class AdminController {
     @RequestMapping("toLogin")
     public String toLogin(HttpSession session) {
         Object username = session.getAttribute("username");
+        Object uid = session.getAttribute("uid");
+
+        if (uid != null) {
+            return "redirect:/user/manage.action";
+        }
 
         if (username != null) {
             return "redirect:/admin/manage.action";

@@ -31,6 +31,13 @@
             <mvc:exclude-mapping path="/admin/login.action"/>
             <bean class="com.ryoeiken.bms.interceptor.AdminLoginInterceptor"/>
         </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/user/toLogin.action"/>
+            <mvc:exclude-mapping path="/user/login.action"/>
+            <bean class="com.ryoeiken.bms.interceptor.UserLoginInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
 </beans>

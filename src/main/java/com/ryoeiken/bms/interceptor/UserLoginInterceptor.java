@@ -7,18 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AdminLoginInterceptor implements HandlerInterceptor {
+public class UserLoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         HttpSession session = httpServletRequest.getSession();
 
-        Object username = session.getAttribute("username");
         Object uid = session.getAttribute("uid");
+        Object username = session.getAttribute("username");
 
-        if (username != null && uid == null) {
+        if (uid != null && username == null) {
             return true;
         } else {
-            httpServletResponse.sendRedirect("http://127.0.0.1/admin/toLogin.action");
+            httpServletResponse.sendRedirect("http://127.0.0.1/user/toLogin.action");
             return false;
         }
     }
