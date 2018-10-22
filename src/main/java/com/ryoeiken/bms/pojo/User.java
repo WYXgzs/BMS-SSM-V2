@@ -1,7 +1,5 @@
 package com.ryoeiken.bms.pojo;
 
-import java.util.Date;
-
 public class User {
     private Integer uid;
 
@@ -11,7 +9,7 @@ public class User {
 
     private String phone;
 
-    private Date createtime;
+    private String createtime;
 
     private String type;
 
@@ -47,12 +45,12 @@ public class User {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime == null ? null : createtime.trim();
     }
 
     public String getType() {

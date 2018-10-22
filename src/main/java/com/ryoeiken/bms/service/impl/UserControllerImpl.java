@@ -16,4 +16,9 @@ public class UserControllerImpl implements UserService {
         User user = this.userMapper.selectByPrimaryKey(uid);
         return user;
     }
+
+    @Override
+    public void addUser(User user) {
+        this.userMapper.insert(user);
+    }
 }

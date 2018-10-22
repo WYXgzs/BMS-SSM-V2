@@ -5,6 +5,7 @@ import com.ryoeiken.bms.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,7 +35,7 @@ public class AdminController {
     //    登录判断
     //    http://127.0.0.1/admin/login.action
     @RequestMapping("login")
-    public String login(String username, String password, HttpSession session) {
+    public String login(@RequestParam(value = "username", required = true) String username, String password, HttpSession session) {
         Admin admin = adminService.queryAdminByUsername(username);
 
         if (admin != null) {

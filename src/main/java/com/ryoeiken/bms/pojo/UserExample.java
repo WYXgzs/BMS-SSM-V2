@@ -1,7 +1,6 @@
 package com.ryoeiken.bms.pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UserExample {
@@ -385,52 +384,62 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeEqualTo(Date value) {
+        public Criteria andCreatetimeEqualTo(String value) {
             addCriterion("createtime =", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotEqualTo(Date value) {
+        public Criteria andCreatetimeNotEqualTo(String value) {
             addCriterion("createtime <>", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThan(Date value) {
+        public Criteria andCreatetimeGreaterThan(String value) {
             addCriterion("createtime >", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeGreaterThanOrEqualTo(String value) {
             addCriterion("createtime >=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThan(Date value) {
+        public Criteria andCreatetimeLessThan(String value) {
             addCriterion("createtime <", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeLessThanOrEqualTo(String value) {
             addCriterion("createtime <=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeIn(List<Date> values) {
+        public Criteria andCreatetimeLike(String value) {
+            addCriterion("createtime like", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotLike(String value) {
+            addCriterion("createtime not like", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIn(List<String> values) {
             addCriterion("createtime in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotIn(List<Date> values) {
+        public Criteria andCreatetimeNotIn(List<String> values) {
             addCriterion("createtime not in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeBetween(String value1, String value2) {
             addCriterion("createtime between", value1, value2, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeNotBetween(String value1, String value2) {
             addCriterion("createtime not between", value1, value2, "createtime");
             return (Criteria) this;
         }

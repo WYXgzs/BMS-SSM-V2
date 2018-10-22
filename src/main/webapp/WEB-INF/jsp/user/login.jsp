@@ -18,5 +18,6 @@
     <input type="password" name="password"><br>
     <input type="submit">
 </form>
+<a href="/user/toRegister.action">用户注册</a>
 </body>
 </html>
