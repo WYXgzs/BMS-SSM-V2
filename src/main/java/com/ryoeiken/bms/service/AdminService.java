@@ -4,4 +4,6 @@ import com.ryoeiken.bms.pojo.Admin;
 
 public interface AdminService {
     Admin queryAdminByUsername(String username);
+
+    void addAdmin(Admin admin);
 }

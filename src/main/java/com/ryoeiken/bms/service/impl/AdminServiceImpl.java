@@ -16,4 +16,9 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = this.adminMapper.selectByPrimaryKey(username);
         return admin;
     }
+
+    @Override
+    public void addAdmin(Admin admin) {
+        this.adminMapper.insert(admin);
+    }
 }

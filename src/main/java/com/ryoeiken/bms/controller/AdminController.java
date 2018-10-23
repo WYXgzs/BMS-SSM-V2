@@ -65,4 +65,28 @@ public class AdminController {
     public String manage() {
         return "admin/manage";
     }
+
+    //    注册页面
+    //    http://127.0.0.1/admin/toRegister.action
+    @RequestMapping("toRegister")
+    public String toRegister() {
+        return "admin/register";
+    }
+
+    //    管理员注册
+    //    http://127.0.0.1/admin/register.action
+    @RequestMapping("register")
+    public String register(@RequestParam(value = "username", required = true) String username,
+                           @RequestParam(value = "password", required = true) String password,
+                           String name, String phone, HttpSession session) {
+        Admin admin = new Admin();
+        admin.setUsername(username);
+        admin.setPassword(password);
+        admin.setName(name);
+        admin.setPhone(phone);
+
+        this.adminService.addAdmin(admin);
+        session.setAttribute("username", username);
+        return "redirect:/admin/manage.action";
+    }
 }

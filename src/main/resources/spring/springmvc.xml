@@ -29,6 +29,8 @@
             <mvc:mapping path="/admin/**"/>
             <mvc:exclude-mapping path="/admin/toLogin.action"/>
             <mvc:exclude-mapping path="/admin/login.action"/>
+            <mvc:exclude-mapping path="/admin/toRegister.action"/>
+            <mvc:exclude-mapping path="/admin/register.action"/>
             <bean class="com.ryoeiken.bms.interceptor.AdminLoginInterceptor"/>
         </mvc:interceptor>
 
