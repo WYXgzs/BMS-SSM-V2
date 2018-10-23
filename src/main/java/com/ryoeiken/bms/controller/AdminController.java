@@ -93,6 +93,8 @@ public class AdminController {
         return "redirect:/admin/manage.action";
     }
 
+    //    查询用户列表
+    //    http://127.0.0.1/admin/userList.action
     @RequestMapping("userList")
     public String userList(Model model) {
         List<User> list = this.adminService.queryUserList();
@@ -100,5 +102,14 @@ public class AdminController {
         model.addAttribute("userList", list);
 
         return "admin/userList";
+    }
+
+    //    删除单个用户
+    //    http://127.0.0.1/admin/userDel.action?uid=${user.uid}
+    @RequestMapping("userDel")
+    public String userDel(@RequestParam(value = "uid", required = true) int uid) {
+        this.adminService.deleteUserByUid(uid);
+
+        return "redirect:/admin/userList.action";
     }
 }

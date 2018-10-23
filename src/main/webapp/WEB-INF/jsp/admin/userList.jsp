@@ -30,8 +30,8 @@
             <td>${user.phone }</td>
             <td>${user.type }</td>
             <td>${user.createtime}</td>
-            <td><a href="userEdit.action?id=${user.uid}">修改</a>
-                <a href="userDel.action?id=${user.uid}">删除</a>
+            <td><a href="userEdit.action?uid=${user.uid}">修改</a>
+                <a href="userDel.action?uid=${user.uid}">删除</a>
             </td>
         </tr>
     </c:forEach>

@@ -11,4 +11,6 @@ public interface AdminService {
     void addAdmin(Admin admin);
 
     List<User> queryUserList();
+
+    void deleteUserByUid(int uid);
 }

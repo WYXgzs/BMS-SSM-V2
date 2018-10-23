@@ -34,4 +34,9 @@ public class AdminServiceImpl implements AdminService {
         List<User> list = this.userMapper.selectByExample(null);
         return list;
     }
+
+    @Override
+    public void deleteUserByUid(int uid) {
+        this.userMapper.deleteByPrimaryKey(uid);
+    }
 }
