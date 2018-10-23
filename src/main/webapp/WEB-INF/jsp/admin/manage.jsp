@@ -11,6 +11,7 @@
     <title>后台管理</title>
 </head>
 <body>
-<a href="logout.action">退出登录</a>
+<a href="logout.action">退出登录</a><br>
+<a href="userList.action">用户列表</a>
 </body>
 </html>

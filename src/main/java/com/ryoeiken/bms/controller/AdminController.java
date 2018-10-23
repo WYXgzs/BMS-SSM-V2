@@ -1,13 +1,16 @@
 package com.ryoeiken.bms.controller;
 
 import com.ryoeiken.bms.pojo.Admin;
+import com.ryoeiken.bms.pojo.User;
 import com.ryoeiken.bms.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("admin")
@@ -88,5 +91,14 @@ public class AdminController {
         this.adminService.addAdmin(admin);
         session.setAttribute("username", username);
         return "redirect:/admin/manage.action";
+    }
+
+    @RequestMapping("userList")
+    public String userList(Model model) {
+        List<User> list = this.adminService.queryUserList();
+
+        model.addAttribute("userList", list);
+
+        return "admin/userList";
     }
 }
