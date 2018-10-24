@@ -15,4 +15,8 @@ public interface AdminService {
     void deleteUserByUid(int uid);
 
     void addUser(User user);
+
+    User queryUserByUid(int uid);
+
+    void updateUser(User user);
 }

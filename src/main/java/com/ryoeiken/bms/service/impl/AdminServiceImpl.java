@@ -44,4 +44,15 @@ public class AdminServiceImpl implements AdminService {
     public void addUser(User user) {
         this.userMapper.insert(user);
     }
+
+    @Override
+    public User queryUserByUid(int uid) {
+        User user = this.userMapper.selectByPrimaryKey(uid);
+        return user;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        this.userMapper.updateByPrimaryKeySelective(user);
+    }
 }

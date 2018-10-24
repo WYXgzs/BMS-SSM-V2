@@ -143,4 +143,22 @@ public class AdminController {
 
         return "redirect:/admin/userList.action";
     }
+
+    //    修改单个用户页面
+    //    http://127.0.0.1/admin/userEdit.action?uid=${user.uid}
+    @RequestMapping("userEdit")
+    public String userEdit(@RequestParam(value = "uid") Integer uid, Model model) {
+        User user = this.adminService.queryUserByUid(uid);
+        model.addAttribute("user", user);
+        return "admin/userEdit";
+    }
+
+    //    修改单个用户
+    //    http://127.0.0.1/admin/updateUser.action
+    @RequestMapping("updateUser")
+    public String updateUser(User user) {
+        this.adminService.updateUser(user);
+
+        return "redirect:/admin/userList.action";
+    }
 }
