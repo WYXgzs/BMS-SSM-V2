@@ -39,4 +39,9 @@ public class AdminServiceImpl implements AdminService {
     public void deleteUserByUid(int uid) {
         this.userMapper.deleteByPrimaryKey(uid);
     }
+
+    @Override
+    public void addUser(User user) {
+        this.userMapper.insert(user);
+    }
 }

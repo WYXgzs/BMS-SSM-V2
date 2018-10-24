@@ -13,4 +13,6 @@ public interface AdminService {
     List<User> queryUserList();
 
     void deleteUserByUid(int uid);
+
+    void addUser(User user);
 }

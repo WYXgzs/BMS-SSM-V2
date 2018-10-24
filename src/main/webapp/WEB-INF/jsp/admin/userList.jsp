@@ -13,6 +13,7 @@
     <title>用户列表</title>
 </head>
 <body>
+<a href="toAddUser.action">添加用户</a><br><br>
 用户列表
 <table width="100%" border=1>
     <tr>

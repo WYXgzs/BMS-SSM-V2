@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -109,6 +111,35 @@ public class AdminController {
     @RequestMapping("userDel")
     public String userDel(@RequestParam(value = "uid", required = true) int uid) {
         this.adminService.deleteUserByUid(uid);
+
+        return "redirect:/admin/userList.action";
+    }
+
+    //    添加单个用户页面
+    //    http://127.0.0.1/admin/toAddUser.action
+    @RequestMapping("toAddUser")
+    public String toAddUser() {
+        return "admin/userRegister";
+    }
+
+    //    添加单个用户
+    //    http://127.0.0.1/admin/addUser.action
+    @RequestMapping("addUser")
+    public String addUser(@RequestParam(value = "uid", required = true) Integer uid,
+                          @RequestParam(value = "password", required = true) String password,
+                          String name, String phone, String type) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        User user = new User();
+        user.setUid(uid);
+        user.setPassword(password);
+        user.setName(name);
+        user.setPhone(phone);
+        user.setType(type);
+        user.setCreatetime(sdf.format(date));
+
+        this.adminService.addUser(user);
 
         return "redirect:/admin/userList.action";
     }
