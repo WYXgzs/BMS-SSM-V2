@@ -14,8 +14,13 @@
 </head>
 <body>
 <a href="toAddUser.action">添加用户</a><br><br>
+查询条件<br>
 <a href="queryByType.action?type=教师">教师</a> <a href="queryByType.action?type=学生">学生</a> <a
-        href="userList.action">所有</a><br><br>
+        href="userList.action">所有</a><br>
+<form action="queryUserByUid.action?uid=${user.uid}">学号/工号：<input type="text" name="uid">
+
+    <input type="submit" value="查询">
+</form>
 用户列表
 <table width="100%" border=1>
     <tr>

@@ -66,5 +66,14 @@ public class AdminServiceImpl implements AdminService {
         return list;
     }
 
+    @Override
+    public List<User> queryListByUid(int uid) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andUidEqualTo(uid);
+        List<User> list = this.userMapper.selectByExample(example);
+        return list;
+    }
+
 
 }

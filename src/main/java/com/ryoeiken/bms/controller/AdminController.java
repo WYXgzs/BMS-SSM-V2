@@ -172,4 +172,13 @@ public class AdminController {
 
         return "admin/userList";
     }
+
+    //    根据查询uid查询用户
+    //    http://127.0.0.1/admin/queryUserByUid.action?uid=${user.uid}
+    @RequestMapping("queryUserByUid")
+    public String queryUserByUid(int uid, Model model) {
+        List<User> list = this.adminService.queryListByUid(uid);
+        model.addAttribute("userList", list);
+        return "admin/userList";
+    }
 }

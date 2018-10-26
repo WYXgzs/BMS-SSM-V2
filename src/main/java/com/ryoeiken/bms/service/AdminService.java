@@ -21,4 +21,6 @@ public interface AdminService {
     void updateUser(User user);
 
     List<User> queryUserByType(String type);
+
+    List<User> queryListByUid(int uid);
 }
