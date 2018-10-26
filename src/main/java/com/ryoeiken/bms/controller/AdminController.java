@@ -161,4 +161,15 @@ public class AdminController {
 
         return "redirect:/admin/userList.action";
     }
+
+    //    根据类型查询用户
+    //    http://127.0.0.1/admin/queryByType.action?type=${user.type}
+    @RequestMapping("queryByType")
+    public String queryByType(String type, Model model) {
+        List<User> list = this.adminService.queryUserByType(type);
+
+        model.addAttribute("userList", list);
+
+        return "admin/userList";
+    }
 }

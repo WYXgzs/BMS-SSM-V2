@@ -14,6 +14,8 @@
 </head>
 <body>
 <a href="toAddUser.action">添加用户</a><br><br>
+<a href="queryByType.action?type=教师">教师</a> <a href="queryByType.action?type=学生">学生</a> <a
+        href="userList.action">所有</a><br><br>
 用户列表
 <table width="100%" border=1>
     <tr>

@@ -4,6 +4,7 @@ import com.ryoeiken.bms.mapper.AdminMapper;
 import com.ryoeiken.bms.mapper.UserMapper;
 import com.ryoeiken.bms.pojo.Admin;
 import com.ryoeiken.bms.pojo.User;
+import com.ryoeiken.bms.pojo.UserExample;
 import com.ryoeiken.bms.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,4 +56,15 @@ public class AdminServiceImpl implements AdminService {
     public void updateUser(User user) {
         this.userMapper.updateByPrimaryKeySelective(user);
     }
+
+    @Override
+    public List<User> queryUserByType(String type) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andTypeEqualTo(type);
+        List<User> list = this.userMapper.selectByExample(example);
+        return list;
+    }
+
+
 }
