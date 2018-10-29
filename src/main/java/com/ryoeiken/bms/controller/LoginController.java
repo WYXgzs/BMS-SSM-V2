@@ -59,4 +59,22 @@ public class LoginController {
         }
         return res;
     }
+
+    @RequestMapping("/admin_main.action")
+    public String toAdminMain() {
+
+        return "admin_main";
+    }
+
+    @RequestMapping("/reader_main.action")
+    public String toReaderMain() {
+
+        return "reader_main";
+    }
+
+    //配置404页面
+    @RequestMapping("*")
+    public String notFond(){
+        return "404";
+    }
 }
