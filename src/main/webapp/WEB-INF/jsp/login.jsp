@@ -16,7 +16,7 @@
     <script src="../../static/js/js.cookie.js"></script>
     <style>
         #login {
-            margin: 200px auto;
+            margin: 100px auto;
             width: 23%;
             z-index: 999;
         }
@@ -26,13 +26,7 @@
             margin: 0;
         }
     </style>
-    <script>
-        $(function () {
-            $('#myCarousel').carousel({
-                interval: 2000
-            })
-        });
-    </script>
+
 </head>
 <body>
 <c:if test="${!empty error}">
@@ -41,6 +35,7 @@
         window.location.href = "login.action";
     </script>
 </c:if>
+<h2 style="text-align: center;font-family: 'Adobe 楷体 Std R';color: palevioletred">欢迎使用图书管理系统</h2>
 <div id="github_iframe">
     <div class="panel panel-default" id="login">
         <div class="panel-heading" style="background-color: #fff">
