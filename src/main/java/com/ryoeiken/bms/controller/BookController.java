@@ -93,4 +93,24 @@ public class BookController {
             return "redirect:/allbooks.action";
         }
     }
+
+    @RequestMapping("/reader_querybook.action")
+    public String readerQueryBook() {
+        return "reader_book_query";
+
+    }
+
+    @RequestMapping("/reader_querybook_do.action")
+    public String readerQueryBookDo(String searchWord, RedirectAttributes redirectAttributes) {
+        boolean exist = bookService.matchBook(searchWord);
+        if (exist) {
+            List<BookInfo> books = bookService.queryBook(searchWord);
+            redirectAttributes.addFlashAttribute("books", books);
+            return "redirect:/reader_querybook.action";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "没有匹配的图书！");
+            return "redirect:/reader_querybook.action";
+        }
+
+    }
 }
