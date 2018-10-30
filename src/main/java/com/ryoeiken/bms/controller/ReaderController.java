@@ -41,8 +41,26 @@ public class ReaderController {
             redirectAttributes.addFlashAttribute("error", "删除失败！");
             return "redirect:/allreaders.action";
         }
-
     }
 
+    @RequestMapping("reader_edit.action")
+    public String readerInfoEdit(Integer readerId, Model model) {
+        ReaderInfo readerInfo = readerInfoService.getReaderInfo(readerId);
+        model.addAttribute("readerInfo", readerInfo);
+        return "admin_reader_edit";
+    }
+
+    @RequestMapping("reader_edit_do.action")
+    public String readerInfoEditDo(ReaderInfo readerInfo, RedirectAttributes redirectAttributes) {
+        boolean succ = this.readerInfoService.editReader(readerInfo);
+
+        if (succ) {
+            redirectAttributes.addFlashAttribute("succ", "读者修改成功！");
+            return "redirect:/allreaders.action";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "读者修改失败！");
+            return "redirect:/allreaders.action";
+        }
+    }
 
 }

@@ -8,4 +8,8 @@ public interface ReaderInfoService {
     List<ReaderInfo> readerInfos();
 
     boolean deleteReaderInfo(Integer readerId);
+
+    ReaderInfo getReaderInfo(Integer readerId);
+
+    boolean editReader(ReaderInfo readerInfo);
 }

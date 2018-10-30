@@ -2,15 +2,14 @@
   Created by IntelliJ IDEA.
   User: ryo
   Date: 2018/10/30
-  Time: 15:56
+  Time: 22:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-    <title>《${detail.name}》</title>
+    <title>编辑${readerInfo.readerId}信息</title>
     <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
     <script src="../../static/js/jquery-3.2.1.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
@@ -75,62 +74,51 @@
 <div class="col-xs-6 col-md-offset-3" style="position: relative;top: 10%">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">《 ${detail.name}》</h3>
+            <h3 class="panel-title">编辑${readerInfo.readerId}信息</h3>
         </div>
         <div class="panel-body">
-            <table class="table table-hover">
-                <tr>
-                    <th width="15%">书名</th>
-                    <td>${detail.name}</td>
-                </tr>
-                <tr>
-                    <th>作者</th>
-                    <td>${detail.author}</td>
-                </tr>
-                <tr>
-                    <th>出版社</th>
-                    <td>${detail.publish}</td>
-                </tr>
-                <tr>
-                    <th>ISBN</th>
-                    <td>${detail.isbn}</td>
-                </tr>
-                <tr>
-                    <th>简介</th>
-                    <td>${detail.introduction}</td>
-                </tr>
-                <tr>
-                    <th>语言</th>
-                    <td>${detail.language}</td>
-                </tr>
-                <tr>
-                    <th>价格</th>
-                    <td>${detail.price}</td>
-                </tr>
-                <tr>
-                    <th>出版日期</th>
-                    <td><fmt:formatDate value="${detail.pubdate}" pattern="yyyy-MM-dd"/></td>
-                </tr>
-                <tr>
-                    <th>分类号</th>
-                    <td>${detail.classId}</td>
-                </tr>
-                <tr>
-                    <th>书架号</th>
-                    <td>${detail.pressmark}</td>
-                </tr>
-                <tr>
-                    <th>状态</th>
-                    <c:if test="${detail.state==1}">
-                        <td>在馆</td>
-                    </c:if>
-                    <c:if test="${detail.state==0}">
-                        <td>借出</td>
-                    </c:if>
+            <form action="reader_edit_do.action?id=${readerInfo.readerId}" method="post" id="readeredit">
 
-                </tr>
-                </tbody>
-            </table>
+                <div class="input-group">
+                    <span class="input-group-addon">读者证号</span>
+                    <input readonly="readonly" type="text" class="form-control" name="readerId" id="readerId"
+                           value="${readerInfo.readerId}">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">姓名</span>
+                    <input type="text" class="form-control" name="name" id="name" value="${readerInfo.name}">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">性别</span>
+                    <input type="text" class="form-control" name="sex" id="sex" value="${readerInfo.sex}">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">生日</span>
+                    <input type="text" class="form-control" name="birth" id="birth"
+                           value="<fmt:formatDate value="${readerInfo.birth}" pattern="yyyy-MM-dd"/>">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">地址</span>
+                    <input type="text" class="form-control" name="address" id="address" value="${readerInfo.address}">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">电话</span>
+                    <input type="text" class="form-control" name="telcode" id="telcode" value="${readerInfo.telcode}">
+                </div>
+                <input type="submit" value="确定" class="btn btn-success btn-sm" class="text-left">
+                <script>
+                    function mySubmit(flag) {
+                        return flag;
+                    }
+
+                    $("#readeredit").submit(function () {
+                        if ($("#name").val() == '' || $("#author").val() == '' || $("#publish").val() == '' || $("#isbn").val() == '' || $("#introduction").val() == '' || $("#language").val() == '' || $("#price").val() == '' || $("#pubdate").val() == '' || $("#classId").val() == '' || $("#pressmark").val() == '' || $("#state").val() == '') {
+                            alert("请填入完整读者信息！");
+                            return mySubmit(false);
+                        }
+                    })
+                </script>
+            </form>
         </div>
     </div>
 

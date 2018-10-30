@@ -23,4 +23,14 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
     public boolean deleteReaderInfo(Integer readerId) {
         return this.readerInfoMapper.deleteByPrimaryKey(readerId) > 0;
     }
+
+    @Override
+    public ReaderInfo getReaderInfo(Integer readerId) {
+        return this.readerInfoMapper.selectByPrimaryKey(readerId);
+    }
+
+    @Override
+    public boolean editReader(ReaderInfo readerInfo) {
+        return this.readerInfoMapper.updateByPrimaryKeySelective(readerInfo) > 0;
+    }
 }
