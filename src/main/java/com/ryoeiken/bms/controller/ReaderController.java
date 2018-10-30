@@ -63,4 +63,20 @@ public class ReaderController {
         }
     }
 
+    @RequestMapping("reader_add.action")
+    public String readerInfoAdd() {
+        return "admin_reader_add";
+    }
+
+    @RequestMapping("reader_add_do.action")
+    public String readerInfoAddDo(ReaderInfo readerInfo, RedirectAttributes redirectAttributes) {
+        boolean succ = this.readerInfoService.addReader(readerInfo);
+        if (succ) {
+            redirectAttributes.addFlashAttribute("succ", "读者添加成功！");
+            return "redirect:/allreaders.action";
+        } else {
+            redirectAttributes.addFlashAttribute("succ", "读者添加失败！");
+            return "redirect:/allreaders.action";
+        }
+    }
 }

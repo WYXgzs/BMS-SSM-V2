@@ -33,4 +33,9 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
     public boolean editReader(ReaderInfo readerInfo) {
         return this.readerInfoMapper.updateByPrimaryKeySelective(readerInfo) > 0;
     }
+
+    @Override
+    public boolean addReader(ReaderInfo readerInfo) {
+        return this.readerInfoMapper.insertSelective(readerInfo) > 0;
+    }
 }

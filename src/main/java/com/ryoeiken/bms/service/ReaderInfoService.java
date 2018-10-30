@@ -12,4 +12,6 @@ public interface ReaderInfoService {
     ReaderInfo getReaderInfo(Integer readerId);
 
     boolean editReader(ReaderInfo readerInfo);
+
+    boolean addReader(ReaderInfo readerInfo);
 }
