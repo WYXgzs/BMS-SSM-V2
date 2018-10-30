@@ -59,4 +59,24 @@ public class BookController {
         model.addAttribute("detail", book);
         return "admin_book_detail";
     }
+
+    @RequestMapping("/updatebook.action")
+    public String bookEdit(Long bookId, Model model) {
+        BookInfo book = this.bookService.getBook(bookId);
+        model.addAttribute("detail", book);
+        return "admin_book_edit";
+    }
+
+    @RequestMapping("/book_edit_do.action")
+    public String bookEditDo(BookInfo bookInfo, Model model) {
+        boolean succ = bookService.editBook(bookInfo);
+
+        if (succ) {
+            model.addAttribute("succ", "图书修改成功！");
+            return "redirect:/allbooks.action";
+        } else {
+            model.addAttribute("error", "图书修改失败！");
+            return "redirect:/allbooks.action";
+        }
+    }
 }

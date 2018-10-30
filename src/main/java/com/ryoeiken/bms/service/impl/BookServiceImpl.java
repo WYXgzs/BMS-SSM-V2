@@ -47,4 +47,10 @@ public class BookServiceImpl implements BookService {
         BookInfo bookInfo = this.bookInfoMapper.selectByPrimaryKey(bookId);
         return bookInfo;
     }
+
+    @Override
+    public boolean editBook(BookInfo bookInfo) {
+        return this.bookInfoMapper.updateByPrimaryKeySelective(bookInfo) > 0;
+    }
+
 }
