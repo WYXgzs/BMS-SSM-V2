@@ -17,9 +17,6 @@ public class LoginServiceImpl implements LoginService {
     private ReaderCardMapper readerCardMapper;
 
     @Autowired
-    private ReaderInfoMapper readerInfoMapper;
-
-    @Autowired
     private AdminMapper adminMapper;
 
     @Override
