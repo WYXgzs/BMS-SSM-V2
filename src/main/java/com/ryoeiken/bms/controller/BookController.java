@@ -113,4 +113,11 @@ public class BookController {
         }
 
     }
+
+    @RequestMapping("/readerbookdetail.action")
+    public String readerBookDetail(Long bookId, Model model) {
+        BookInfo book = bookService.getBook(bookId);
+        model.addAttribute("detail", book);
+        return "reader_book_detail";
+    }
 }
