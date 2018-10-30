@@ -8,4 +8,8 @@ public interface LoginService {
     boolean hasMatchAdmin(int id, String passwd);
 
     ReaderCard findReaderCardByUserId(int id);
+
+    String getAdminPasswd(int id);
+
+    boolean adminRePasswd(int id, String newPasswd);
 }

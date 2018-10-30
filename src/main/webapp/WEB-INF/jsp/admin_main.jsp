@@ -27,7 +27,7 @@
      role="navigation">
     <div class="container-fluid">
         <div class="navbar-header" style="margin-left: 8%;margin-right: 1%">
-            <a class="navbar-brand" href="admin_main.action">后台管理</a>
+            <a class="navbar-brand" href="admin_main.action">图书管理系统</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">

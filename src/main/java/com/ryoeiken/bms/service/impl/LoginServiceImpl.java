@@ -3,6 +3,7 @@ package com.ryoeiken.bms.service.impl;
 import com.ryoeiken.bms.mapper.AdminMapper;
 import com.ryoeiken.bms.mapper.ReaderCardMapper;
 import com.ryoeiken.bms.mapper.ReaderInfoMapper;
+import com.ryoeiken.bms.pojo.Admin;
 import com.ryoeiken.bms.pojo.AdminExample;
 import com.ryoeiken.bms.pojo.ReaderCard;
 import com.ryoeiken.bms.pojo.ReaderCardExample;
@@ -45,5 +46,20 @@ public class LoginServiceImpl implements LoginService {
     public ReaderCard findReaderCardByUserId(int id) {
         ReaderCard readerCard = this.readerCardMapper.selectByPrimaryKey(id);
         return readerCard;
+    }
+
+    @Override
+    public String getAdminPasswd(int id) {
+        Admin admin = this.adminMapper.selectByPrimaryKey(id);
+        String passwd = admin.getPassword();
+        return passwd;
+    }
+
+    @Override
+    public boolean adminRePasswd(int id, String newPasswd) {
+        Admin admin = this.adminMapper.selectByPrimaryKey(id);
+        admin.setPassword(newPasswd);
+        return this.adminMapper.updateByPrimaryKeySelective(admin) > 0;
+
     }
 }

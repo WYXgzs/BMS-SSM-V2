@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -72,9 +73,38 @@ public class LoginController {
         return "reader_main";
     }
 
+    @RequestMapping("/admin_repasswd.action")
+    public String reAdminPasswd() {
+
+        return "admin_repasswd";
+    }
+
+    @RequestMapping("/admin_repasswd_do.action")
+    public String reAdminPasswdDo(HttpServletRequest request, String oldPasswd, String newPasswd, RedirectAttributes redirectAttributes) {
+
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        int id = admin.getAdminId();
+        String passwd = loginService.getAdminPasswd(id);
+
+        if (passwd.equals(oldPasswd)) {
+            boolean succ = loginService.adminRePasswd(id, newPasswd);
+            if (succ) {
+
+                redirectAttributes.addFlashAttribute("succ", "密码修改成功！");
+                return "redirect:/admin_repasswd.action";
+            } else {
+                redirectAttributes.addFlashAttribute("error", "密码修改失败！");
+                return "redirect:/admin_repasswd.action";
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("error", "旧密码错误！");
+            return "redirect:/admin_repasswd.action";
+        }
+    }
+
     //配置404页面
     @RequestMapping("*")
-    public String notFond(){
+    public String notFond() {
         return "404";
     }
 }
