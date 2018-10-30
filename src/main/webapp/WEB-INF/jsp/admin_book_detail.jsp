@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <title>《${detail.name}》</title>
@@ -109,7 +110,7 @@
                 </tr>
                 <tr>
                     <th>出版日期</th>
-                    <td>${detail.pubdate}</td>
+                    <td><fmt:formatDate value="${detail.pubdate}" pattern="yyyy-MM-dd"/></td>
                 </tr>
                 <tr>
                     <th>分类号</th>

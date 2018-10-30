@@ -18,4 +18,9 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
         List<ReaderInfo> readerInfos = this.readerInfoMapper.selectByExample(null);
         return readerInfos;
     }
+
+    @Override
+    public boolean deleteReaderInfo(Integer readerId) {
+        return this.readerInfoMapper.deleteByPrimaryKey(readerId) > 0;
+    }
 }

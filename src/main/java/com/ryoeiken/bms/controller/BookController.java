@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -41,14 +42,14 @@ public class BookController {
     }
 
     @RequestMapping("/book_add_do.action")
-    public String addBookDo(BookInfo bookInfo, Model model) {
+    public String addBookDo(BookInfo bookInfo, RedirectAttributes redirectAttributes) {
 
         boolean succ = this.bookService.addBook(bookInfo);
         if (succ) {
-            model.addAttribute("succ", "图书添加成功！");
+            redirectAttributes.addFlashAttribute("succ", "图书添加成功！");
             return "redirect:/allbooks.action";
         } else {
-            model.addAttribute("succ", "图书添加失败！");
+            redirectAttributes.addFlashAttribute("succ", "图书添加失败！");
             return "redirect:/allbooks.action";
         }
     }
@@ -68,27 +69,27 @@ public class BookController {
     }
 
     @RequestMapping("/book_edit_do.action")
-    public String bookEditDo(BookInfo bookInfo, Model model) {
+    public String bookEditDo(BookInfo bookInfo, RedirectAttributes redirectAttributes) {
         boolean succ = this.bookService.editBook(bookInfo);
 
         if (succ) {
-            model.addAttribute("succ", "图书修改成功！");
+            redirectAttributes.addFlashAttribute("succ", "图书修改成功！");
             return "redirect:/allbooks.action";
         } else {
-            model.addAttribute("error", "图书修改失败！");
+            redirectAttributes.addFlashAttribute("error", "图书修改失败！");
             return "redirect:/allbooks.action";
         }
     }
 
     @RequestMapping("/deletebook.action")
-    public String deleteBook(Long bookId, Model model) {
+    public String deleteBook(Long bookId, RedirectAttributes redirectAttributes) {
         int res = bookService.deleteBook(bookId);
 
         if (res == 1) {
-            model.addAttribute("succ", "图书删除成功！");
+            redirectAttributes.addFlashAttribute("succ", "图书删除成功！");
             return "redirect:/allbooks.action";
         } else {
-            model.addAttribute("error", "图书删除失败！");
+            redirectAttributes.addFlashAttribute("error", "图书删除失败！");
             return "redirect:/allbooks.action";
         }
     }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ReaderInfoService {
     List<ReaderInfo> readerInfos();
+
+    boolean deleteReaderInfo(Integer readerId);
 }
