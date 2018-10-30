@@ -97,7 +97,7 @@
         })
     </script>
 </div>
-<div style="position: relative;top: 10%">
+<div style="position: relative;">
     <c:if test="${!empty succ}">
         <div class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert"

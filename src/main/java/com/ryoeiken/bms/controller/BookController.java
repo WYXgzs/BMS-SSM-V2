@@ -20,4 +20,17 @@ public class BookController {
         model.addAttribute("books", books);
         return "admin_books";
     }
+
+    @RequestMapping("/querybook.action")
+    public String queryBookDo(String searchWord, Model model) {
+        boolean exist = bookService.matchBook(searchWord);
+        if (exist) {
+            List<BookInfo> books = bookService.queryBook(searchWord);
+            model.addAttribute("books", books);
+            return "admin_books";
+        } else {
+            model.addAttribute("error", "没有匹配的图书");
+            return "admin_books";
+        }
+    }
 }
