@@ -10,4 +10,6 @@ public interface BookService {
     boolean matchBook(String searchWord);
 
     List<BookInfo> queryBook(String searchWord);
+
+    boolean addBook(BookInfo bookInfo);
 }

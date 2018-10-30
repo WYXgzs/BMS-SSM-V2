@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService {
     public boolean matchBook(String searchWord) {
         BookInfoExample bookInfoExample = new BookInfoExample();
         BookInfoExample.Criteria criteria = bookInfoExample.createCriteria();
-        criteria.andNameLike("%"+searchWord+"%");
+        criteria.andNameLike("%" + searchWord + "%");
         return this.bookInfoMapper.countByExample(bookInfoExample) > 0;
     }
 
@@ -32,8 +32,13 @@ public class BookServiceImpl implements BookService {
     public List<BookInfo> queryBook(String searchWord) {
         BookInfoExample bookInfoExample = new BookInfoExample();
         BookInfoExample.Criteria criteria = bookInfoExample.createCriteria();
-        criteria.andNameLike("%"+searchWord+"%");
+        criteria.andNameLike("%" + searchWord + "%");
         List<BookInfo> books = this.bookInfoMapper.selectByExample(bookInfoExample);
         return books;
+    }
+
+    @Override
+    public boolean addBook(BookInfo bookInfo) {
+        return this.bookInfoMapper.insertSelective(bookInfo) > 0;
     }
 }
