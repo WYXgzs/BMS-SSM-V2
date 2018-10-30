@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -46,7 +43,7 @@ public class BookController {
     @RequestMapping("/book_add_do.action")
     public String addBookDo(BookInfo bookInfo, Model model) {
 
-        boolean succ = bookService.addBook(bookInfo);
+        boolean succ = this.bookService.addBook(bookInfo);
         if (succ) {
             model.addAttribute("succ", "图书添加成功！");
             return "redirect:/allbooks.action";
@@ -54,5 +51,12 @@ public class BookController {
             model.addAttribute("succ", "图书添加失败！");
             return "redirect:/allbooks.action";
         }
+    }
+
+    @RequestMapping("/bookdetail.action")
+    public String bookDetail(Long bookId, Model model) {
+        BookInfo book = this.bookService.getBook(bookId);
+        model.addAttribute("detail", book);
+        return "admin_book_detail";
     }
 }

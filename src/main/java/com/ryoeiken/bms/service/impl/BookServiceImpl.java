@@ -41,4 +41,10 @@ public class BookServiceImpl implements BookService {
     public boolean addBook(BookInfo bookInfo) {
         return this.bookInfoMapper.insertSelective(bookInfo) > 0;
     }
+
+    @Override
+    public BookInfo getBook(Long bookId) {
+        BookInfo bookInfo = this.bookInfoMapper.selectByPrimaryKey(bookId);
+        return bookInfo;
+    }
 }

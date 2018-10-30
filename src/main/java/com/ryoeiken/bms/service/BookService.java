@@ -12,4 +12,6 @@ public interface BookService {
     List<BookInfo> queryBook(String searchWord);
 
     boolean addBook(BookInfo bookInfo);
+
+    BookInfo getBook(Long bookId);
 }
