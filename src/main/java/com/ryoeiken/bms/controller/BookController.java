@@ -69,13 +69,26 @@ public class BookController {
 
     @RequestMapping("/book_edit_do.action")
     public String bookEditDo(BookInfo bookInfo, Model model) {
-        boolean succ = bookService.editBook(bookInfo);
+        boolean succ = this.bookService.editBook(bookInfo);
 
         if (succ) {
             model.addAttribute("succ", "图书修改成功！");
             return "redirect:/allbooks.action";
         } else {
             model.addAttribute("error", "图书修改失败！");
+            return "redirect:/allbooks.action";
+        }
+    }
+
+    @RequestMapping("/deletebook.action")
+    public String deleteBook(Long bookId, Model model) {
+        int res = bookService.deleteBook(bookId);
+
+        if (res == 1) {
+            model.addAttribute("succ", "图书删除成功！");
+            return "redirect:/allbooks.action";
+        } else {
+            model.addAttribute("error", "图书删除失败！");
             return "redirect:/allbooks.action";
         }
     }

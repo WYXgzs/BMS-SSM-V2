@@ -53,4 +53,9 @@ public class BookServiceImpl implements BookService {
         return this.bookInfoMapper.updateByPrimaryKeySelective(bookInfo) > 0;
     }
 
+    @Override
+    public int deleteBook(Long bookId) {
+        return this.bookInfoMapper.deleteByPrimaryKey(bookId);
+    }
+
 }
