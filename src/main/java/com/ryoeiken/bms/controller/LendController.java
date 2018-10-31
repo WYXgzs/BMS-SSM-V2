@@ -27,4 +27,11 @@ public class LendController {
         model.addAttribute("list", list);
         return "reader_lend_list";
     }
+
+    @RequestMapping("/lendlist.action")
+    public String lendList(Model model) {
+        List<LendList> list = this.lendService.lendList();
+        model.addAttribute("list", list);
+        return "admin_lend_list";
+    }
 }

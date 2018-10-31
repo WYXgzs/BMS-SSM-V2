@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface LendService {
     List<LendList> myLendList(Integer readerId);
+
+    List<LendList> lendList();
 }

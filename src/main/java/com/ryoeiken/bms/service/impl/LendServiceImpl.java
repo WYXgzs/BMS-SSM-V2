@@ -23,4 +23,10 @@ public class LendServiceImpl implements LendService {
         List<LendList> lendLists = this.lendListMapper.selectByExample(lendListExample);
         return lendLists;
     }
+
+    @Override
+    public List<LendList> lendList() {
+        List<LendList> list = this.lendListMapper.selectByExample(null);
+        return list;
+    }
 }
