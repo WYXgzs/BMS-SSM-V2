@@ -89,4 +89,46 @@ public class ReaderController {
         model.addAttribute("readerinfo", readerInfo);
         return "reader_info";
     }
+
+    @RequestMapping("reader_info_edit.action")
+    public String readerInfoEditReader(HttpSession session, Model model) {
+        ReaderCard readerCard = (ReaderCard) session.getAttribute("readercard");
+        ReaderInfo readerInfo = this.readerInfoService.getReaderInfo(readerCard.getReaderId());
+        model.addAttribute("readerinfo", readerInfo);
+        return "reader_info_edit";
+
+    }
+
+    @RequestMapping("reader_edit_do_r.action")
+    public String readerInfoEditDoReader(HttpSession session, ReaderInfo readerInfo, RedirectAttributes redirectAttributes) {
+        ReaderCard readerCard = (ReaderCard) session.getAttribute("readercard");
+        String name = readerInfo.getName();
+        if (!readerCard.getName().equals(name)) {
+            boolean succo = this.readerCardService.updateName(readerInfo.getReaderId(), name);
+
+            boolean succ = this.readerInfoService.editReader(readerInfo);
+            if (succ && succo) {
+                ReaderCard readerCardNew = this.loginService.findReaderCardByUserId(readerCard.getReaderId());
+                session.setAttribute("readercard", readerCardNew);
+                redirectAttributes.addFlashAttribute("succ", "信息修改成功！");
+                return "redirect:/reader_info.action";
+            } else {
+                redirectAttributes.addFlashAttribute("error", "信息修改失败！");
+                return "redirect:/reader_info.action";
+            }
+
+        } else {
+            boolean succ = this.readerInfoService.editReader(readerInfo);
+            if (succ) {
+                ReaderCard readerCardNew = this.loginService.findReaderCardByUserId(readerCard.getReaderId());
+                session.setAttribute("readercard", readerCardNew);
+                redirectAttributes.addFlashAttribute("succ", "信息修改成功！");
+                return "redirect:/reader_info.action";
+            } else {
+                redirectAttributes.addFlashAttribute("error", "信息修改失败！");
+                return "redirect:/reader_info.action";
+            }
+        }
+
+    }
 }
