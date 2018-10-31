@@ -23,4 +23,16 @@ public class ReaderCardServiceImpl implements ReaderCardService {
 
         return this.readerCardMapper.updateByExampleSelective(readerCard, readerCardExample) > 0;
     }
+
+    @Override
+    public boolean updatePasswd(int readerId, String newPasswd) {
+        ReaderCard readerCard = new ReaderCard();
+        readerCard.setPasswd(newPasswd);
+
+        ReaderCardExample readerCardExample = new ReaderCardExample();
+        ReaderCardExample.Criteria criteria = readerCardExample.createCriteria();
+        criteria.andReaderIdEqualTo(readerId);
+
+        return this.readerCardMapper.updateByExampleSelective(readerCard, readerCardExample) > 0;
+    }
 }

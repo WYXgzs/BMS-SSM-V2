@@ -131,4 +131,40 @@ public class ReaderController {
         }
 
     }
+
+    @RequestMapping("reader_repasswd.action")
+    public String readerRePasswd() {
+        return "reader_repasswd";
+    }
+
+    @RequestMapping("reader_repasswd_do.action")
+    public String readerRePasswdDo(HttpSession session, String oldPasswd, String newPasswd, String reNewPasswd,
+                                   RedirectAttributes redirectAttributes) {
+        ReaderCard readerCard = (ReaderCard) session.getAttribute("readercard");
+        int readerId = readerCard.getReaderId();
+        String passwd = readerCard.getPasswd();
+
+        if (newPasswd.equals(reNewPasswd)) {
+            if (passwd.equals(oldPasswd)) {
+                boolean succ = readerCardService.updatePasswd(readerId, newPasswd);
+                if (succ) {
+                    ReaderCard readerCardNew = this.loginService.findReaderCardByUserId(readerId);
+                    session.setAttribute("readercard", readerCardNew);
+                    redirectAttributes.addFlashAttribute("succ", "密码修改成功！");
+                    return "redirect:/reader_repasswd.action";
+                } else {
+                    redirectAttributes.addFlashAttribute("succ", "密码修改失败！");
+                    return "redirect:/reader_repasswd.action";
+                }
+
+            } else {
+                redirectAttributes.addFlashAttribute("error", "修改失败,原密码错误");
+                return "redirect:/reader_repasswd.action";
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("error", "修改失败,两次输入的新密码不相同");
+            return "redirect:/reader_repasswd.action";
+        }
+
+    }
 }
