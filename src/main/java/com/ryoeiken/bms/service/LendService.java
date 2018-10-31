@@ -14,4 +14,6 @@ public interface LendService {
     boolean matchLog(Integer searchWord);
 
     boolean bookLend(Long bookId, Integer readerId);
+
+    boolean bookReturn(Long bookId);
 }

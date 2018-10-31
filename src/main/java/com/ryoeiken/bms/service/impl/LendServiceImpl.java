@@ -58,6 +58,7 @@ public class LendServiceImpl implements LendService {
         String date = sdf.format(new Date());
         try {
             Date lendDate = sdf.parse(date);
+
             LendList lendList = new LendList();
             lendList.setBookId(bookId);
             lendList.setReaderId(readerId);
@@ -73,6 +74,39 @@ public class LendServiceImpl implements LendService {
             int updateSuc = this.bookInfoMapper.updateByExampleSelective(bookInfo, bookInfoExample);
 
             return addSuc > 0 && updateSuc > 0;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean bookReturn(Long bookId) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+
+        try {
+            Date backDate = sdf.parse(date);
+
+            LendList lendList = new LendList();
+            lendList.setBackDate(backDate);
+
+            LendListExample lendListExample = new LendListExample();
+            LendListExample.Criteria lendCriteria = lendListExample.createCriteria();
+            lendCriteria.andBookIdEqualTo(bookId);
+
+            int updateLendSuc = this.lendListMapper.updateByExampleSelective(lendList, lendListExample);
+
+            BookInfo bookInfo = new BookInfo();
+            bookInfo.setState((short) 1);
+
+            BookInfoExample bookInfoExample = new BookInfoExample();
+            BookInfoExample.Criteria bookCriteria = bookInfoExample.createCriteria();
+            bookCriteria.andBookIdEqualTo(bookId);
+            int updateBookSuc = this.bookInfoMapper.updateByExampleSelective(bookInfo, bookInfoExample);
+
+            return updateLendSuc > 0 && updateBookSuc > 0;
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

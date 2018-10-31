@@ -81,5 +81,17 @@ public class LendController {
         }
 
     }
+
+    @RequestMapping("/returnbook.action")
+    public String bookReturn(Long bookId, RedirectAttributes redirectAttributes) {
+        boolean retSucc = lendService.bookReturn(bookId);
+        if (retSucc) {
+            redirectAttributes.addFlashAttribute("succ", "图书归还成功！");
+            return "redirect:/allbooks.action";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "图书归还失败！");
+            return "redirect:/allbooks.action";
+        }
+    }
 }
 

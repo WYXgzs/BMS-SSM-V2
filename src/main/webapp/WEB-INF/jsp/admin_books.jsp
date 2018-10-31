@@ -146,12 +146,12 @@
                     <td><c:out value="${book.isbn}"></c:out></td>
                     <td><c:out value="${book.price}"></c:out></td>
                     <c:if test="${book.state==1}">
-                        <td><a href="lendbook.action?bookId=<c:out value="${book.bookId}"></c:out>">
+                        <td><a href="lendbook.action?bookId=${book.bookId}">
                             <button type="button" class="btn btn-primary btn-xs">借阅</button>
                         </a></td>
                     </c:if>
                     <c:if test="${book.state==0}">
-                        <td><a href="returnbook.action?bookId=<c:out value="${book.bookId}"></c:out>">
+                        <td><a href="returnbook.action?bookId=${book.bookId}">
                             <button type="button" class="btn btn-primary btn-xs">归还</button>
                         </a></td>
                     </c:if>
