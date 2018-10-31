@@ -73,7 +73,7 @@
     </div>
 </nav>
 <div style="padding: 70px 550px 10px">
-    <form method="post" action="querybook.html" class="form-inline" id="searchform">
+    <form method="post" action="querybook.action" class="form-inline" id="searchform">
         <div class="input-group">
             <input type="text" placeholder="输入图书名" class="form-control" id="search" name="searchWord"
                    class="form-control">
@@ -96,7 +96,7 @@
         })
     </script>
 </div>
-<div style="position: relative;top: 10%">
+<div style="position: relative;">
     <c:if test="${!empty succ}">
         <div class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert"
@@ -142,7 +142,7 @@
                     <td>${alog.readerId}</td>
                     <td><fmt:formatDate value="${alog.lendDate}" pattern="yyyy-MM-dd"/></td>
                     <td><fmt:formatDate value="${alog.backDate}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="deletebook.html?bookId=${alog.sernum}">
+                    <td><a href="deletelog.action?sernum=${alog.sernum}">
                         <button type=" button" class="btn btn-danger btn-xs">删除</button>
                     </a></td>
                 </tr>

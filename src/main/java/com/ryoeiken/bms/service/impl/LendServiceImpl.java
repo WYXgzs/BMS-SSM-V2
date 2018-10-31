@@ -29,4 +29,9 @@ public class LendServiceImpl implements LendService {
         List<LendList> list = this.lendListMapper.selectByExample(null);
         return list;
     }
+
+    @Override
+    public boolean deleteLog(Long sernum) {
+        return this.lendListMapper.deleteByPrimaryKey(sernum) > 0;
+    }
 }
