@@ -1,5 +1,6 @@
 package com.ryoeiken.bms.controller;
 
+import com.ryoeiken.bms.pojo.ReaderCard;
 import com.ryoeiken.bms.pojo.ReaderInfo;
 import com.ryoeiken.bms.service.LoginService;
 import com.ryoeiken.bms.service.ReaderCardService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -78,5 +80,13 @@ public class ReaderController {
             redirectAttributes.addFlashAttribute("succ", "读者添加失败！");
             return "redirect:/allreaders.action";
         }
+    }
+
+    @RequestMapping("/reader_info.action")
+    public String toReaderInfo(HttpSession session, Model model) {
+        ReaderCard readerCard = (ReaderCard) session.getAttribute("readercard");
+        ReaderInfo readerInfo = this.readerInfoService.getReaderInfo(readerCard.getReaderId());
+        model.addAttribute("readerinfo", readerInfo);
+        return "reader_info";
     }
 }
