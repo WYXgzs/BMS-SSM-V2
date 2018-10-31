@@ -47,5 +47,18 @@ public class LendController {
             return "redirect:/lendlist.action";
         }
     }
+
+    @RequestMapping("/querylog.action")
+    public String queryLog(Integer searchWord, Model model) {
+        boolean exist = this.lendService.matchLog(searchWord);
+        if (exist) {
+            List<LendList> list = this.lendService.queryLog(searchWord);
+            model.addAttribute("list", list);
+            return "admin_lend_list";
+        } else {
+            model.addAttribute("error", "该读者没有借还信息");
+            return "admin_lend_list";
+        }
+    }
 }
 

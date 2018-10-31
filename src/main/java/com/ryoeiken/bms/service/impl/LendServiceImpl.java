@@ -34,4 +34,21 @@ public class LendServiceImpl implements LendService {
     public boolean deleteLog(Long sernum) {
         return this.lendListMapper.deleteByPrimaryKey(sernum) > 0;
     }
+
+    @Override
+    public boolean matchLog(Integer searchWord) {
+        LendListExample lendListExample = new LendListExample();
+        LendListExample.Criteria criteria = lendListExample.createCriteria();
+        criteria.andReaderIdEqualTo(searchWord);
+        return this.lendListMapper.countByExample(lendListExample) > 0;
+    }
+
+    @Override
+    public List<LendList> queryLog(Integer searchWord) {
+        LendListExample lendListExample = new LendListExample();
+        LendListExample.Criteria criteria = lendListExample.createCriteria();
+        criteria.andReaderIdEqualTo(searchWord);
+        List<LendList> list = this.lendListMapper.selectByExample(lendListExample);
+        return list;
+    }
 }

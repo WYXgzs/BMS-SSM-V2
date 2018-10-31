@@ -10,4 +10,8 @@ public interface LendService {
     List<LendList> lendList();
 
     boolean deleteLog(Long sernum);
+
+    boolean matchLog(Integer searchWord);
+
+    List<LendList> queryLog(Integer searchWord);
 }
