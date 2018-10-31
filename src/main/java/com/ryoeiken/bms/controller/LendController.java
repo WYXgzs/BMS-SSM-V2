@@ -1,5 +1,6 @@
 package com.ryoeiken.bms.controller;
 
+import com.ryoeiken.bms.pojo.BookInfo;
 import com.ryoeiken.bms.pojo.LendList;
 import com.ryoeiken.bms.pojo.ReaderCard;
 import com.ryoeiken.bms.service.BookService;
@@ -52,13 +53,33 @@ public class LendController {
     public String queryLog(Integer searchWord, Model model) {
         boolean exist = this.lendService.matchLog(searchWord);
         if (exist) {
-            List<LendList> list = this.lendService.queryLog(searchWord);
+            List<LendList> list = this.lendService.myLendList(searchWord);
             model.addAttribute("list", list);
             return "admin_lend_list";
         } else {
             model.addAttribute("error", "该读者没有借还信息");
             return "admin_lend_list";
         }
+    }
+
+    @RequestMapping("/lendbook.action")
+    public String bookLend(Long bookId, Model model) {
+        BookInfo book = this.bookService.getBook(bookId);
+        model.addAttribute("book", book);
+        return "admin_book_lend";
+    }
+
+    @RequestMapping("/lendbookdo.action")
+    public String bookLendDo(Long bookId, Integer readerId, RedirectAttributes redirectAttributes) {
+        boolean lendsucc = this.lendService.bookLend(bookId, readerId);
+        if (lendsucc) {
+            redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
+            return "redirect:/allbooks.action";
+        } else {
+            redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
+            return "redirect:/allbooks.action";
+        }
+
     }
 }
 
