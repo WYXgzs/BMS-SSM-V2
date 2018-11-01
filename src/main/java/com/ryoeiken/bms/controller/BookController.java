@@ -1,11 +1,13 @@
 package com.ryoeiken.bms.controller;
 
 import com.ryoeiken.bms.pojo.BookInfo;
+import com.ryoeiken.bms.pojo.PageResult;
 import com.ryoeiken.bms.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -16,9 +18,11 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping("/allbooks.action")
-    public String allBook(Model model) {
-        List<BookInfo> books = this.bookService.getAllBooks();
-        model.addAttribute("books", books);
+    public String allBook(Model model,@RequestParam(defaultValue="1")Integer pageNum,
+                          @RequestParam(defaultValue="5")Integer pageSize) {
+        PageResult<BookInfo> books = this.bookService.getAllBooks(pageNum, pageSize);
+        model.addAttribute("books", books.getList());
+        model.addAttribute("page",books);
         return "admin_books";
     }
 

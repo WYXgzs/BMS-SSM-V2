@@ -1,5 +1,6 @@
 package com.ryoeiken.bms.controller;
 
+import com.ryoeiken.bms.pojo.PageResult;
 import com.ryoeiken.bms.pojo.ReaderCard;
 import com.ryoeiken.bms.pojo.ReaderInfo;
 import com.ryoeiken.bms.service.LoginService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -26,9 +28,12 @@ public class ReaderController {
     private LoginService loginService;
 
     @RequestMapping("allreaders.action")
-    public String allBooks(Model model) {
-        List<ReaderInfo> readers = this.readerInfoService.readerInfos();
-        model.addAttribute("readers", readers);
+    public String allBooks(Model model,@RequestParam(defaultValue="1")Integer pageNum,
+                           @RequestParam(defaultValue="5")Integer pageSize) {
+        PageResult<ReaderInfo> readers = this.readerInfoService.readerInfos(pageNum, pageSize);
+        model.addAttribute("readers",readers.getList());
+
+        model.addAttribute("page",readers);
         return "admin_readers";
     }
 

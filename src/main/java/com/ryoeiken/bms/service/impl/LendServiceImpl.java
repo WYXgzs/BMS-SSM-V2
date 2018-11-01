@@ -1,11 +1,10 @@
 package com.ryoeiken.bms.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ryoeiken.bms.mapper.BookInfoMapper;
 import com.ryoeiken.bms.mapper.LendListMapper;
-import com.ryoeiken.bms.pojo.BookInfo;
-import com.ryoeiken.bms.pojo.BookInfoExample;
-import com.ryoeiken.bms.pojo.LendList;
-import com.ryoeiken.bms.pojo.LendListExample;
+import com.ryoeiken.bms.pojo.*;
 import com.ryoeiken.bms.service.LendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +32,20 @@ public class LendServiceImpl implements LendService {
     }
 
     @Override
-    public List<LendList> lendList() {
+    public PageResult<LendList> lendList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         List<LendList> list = this.lendListMapper.selectByExample(null);
-        return list;
+        PageInfo<LendList> pageInfo = new PageInfo<>(list);
+        long total = pageInfo.getTotal();
+        int pages = pageInfo.getPages();
+        PageResult<LendList> page = new PageResult<>();
+        page.setList(list);
+        page.setPageNum(pageNum);
+        page.setPages(pages);
+        page.setPageSize(pageSize);
+        page.setTotal(total);
+
+        return page;
     }
 
     @Override
