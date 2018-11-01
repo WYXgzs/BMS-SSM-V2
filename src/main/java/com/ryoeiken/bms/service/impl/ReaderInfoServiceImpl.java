@@ -1,6 +1,10 @@
 package com.ryoeiken.bms.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ryoeiken.bms.mapper.ReaderInfoMapper;
+import com.ryoeiken.bms.pojo.BookInfo;
+import com.ryoeiken.bms.pojo.PageResult;
 import com.ryoeiken.bms.pojo.ReaderInfo;
 import com.ryoeiken.bms.service.ReaderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +18,20 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
     private ReaderInfoMapper readerInfoMapper;
 
     @Override
-    public List<ReaderInfo> readerInfos() {
+    public PageResult<ReaderInfo> readerInfos(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         List<ReaderInfo> readerInfos = this.readerInfoMapper.selectByExample(null);
-        return readerInfos;
+        PageInfo<ReaderInfo> pageInfo = new PageInfo<>(readerInfos);
+        long total = pageInfo.getTotal();
+        int pages = pageInfo.getPages();
+        PageResult<ReaderInfo> page = new PageResult<>();
+        page.setList(readerInfos);
+        page.setPageNum(pageNum);
+        page.setPages(pages);
+        page.setPageSize(pageSize);
+        page.setTotal(total);
+
+        return page;
     }
 
     @Override

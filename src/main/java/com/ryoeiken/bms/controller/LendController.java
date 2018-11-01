@@ -2,6 +2,7 @@ package com.ryoeiken.bms.controller;
 
 import com.ryoeiken.bms.pojo.BookInfo;
 import com.ryoeiken.bms.pojo.LendList;
+import com.ryoeiken.bms.pojo.PageResult;
 import com.ryoeiken.bms.pojo.ReaderCard;
 import com.ryoeiken.bms.service.BookService;
 import com.ryoeiken.bms.service.LendService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -31,9 +33,11 @@ public class LendController {
     }
 
     @RequestMapping("/lendlist.action")
-    public String lendList(Model model) {
-        List<LendList> list = this.lendService.lendList();
-        model.addAttribute("list", list);
+    public String lendList(Model model,@RequestParam(defaultValue="1")Integer pageNum,
+                           @RequestParam(defaultValue="5")Integer pageSize) {
+        PageResult<LendList> list = this.lendService.lendList(pageNum, pageSize);
+        model.addAttribute("list", list.getList());
+        model.addAttribute("page",list);
         return "admin_lend_list";
     }
 

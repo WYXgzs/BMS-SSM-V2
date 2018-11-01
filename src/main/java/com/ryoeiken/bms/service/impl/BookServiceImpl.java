@@ -1,8 +1,11 @@
 package com.ryoeiken.bms.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ryoeiken.bms.mapper.BookInfoMapper;
 import com.ryoeiken.bms.pojo.BookInfo;
 import com.ryoeiken.bms.pojo.BookInfoExample;
+import com.ryoeiken.bms.pojo.PageResult;
 import com.ryoeiken.bms.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +18,20 @@ public class BookServiceImpl implements BookService {
     BookInfoMapper bookInfoMapper;
 
     @Override
-    public List<BookInfo> getAllBooks() {
+    public PageResult<BookInfo> getAllBooks(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
         List<BookInfo> books = this.bookInfoMapper.selectByExample(null);
-        return books;
+        PageInfo<BookInfo> pageInfo = new PageInfo<>(books);
+        long total = pageInfo.getTotal();
+        int pages = pageInfo.getPages();
+        PageResult<BookInfo> page = new PageResult<>();
+        page.setList(books);
+        page.setPageNum(pageNum);
+        page.setPages(pages);
+        page.setPageSize(pageSize);
+        page.setTotal(total);
+
+        return page;
     }
 
     @Override

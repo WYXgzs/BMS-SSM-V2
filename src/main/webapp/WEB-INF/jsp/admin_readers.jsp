@@ -136,6 +136,59 @@
             </tbody>
         </table>
     </div>
+    <div class="panel-footer">
+        <div class="pagination">
+            <div class="form-group form-inline">
+                总共 ${ page.pages } 页，
+                第 ${ page.pageNum } 页，
+                共 ${ page.total } 条数据。
+                每页 <select class="form-control" onchange="submitPageSize(this)">
+                <option value="5" <c:if test="${ page.pageSize == 5 }">selected</c:if> >5</option>
+                <option value="10" <c:if test="${ page.pageSize == 10 }">selected</c:if> >10</option>
+            </select> 条
+            </div>
+
+            <script type="text/javascript">
+                // 提交条数
+                function submitPageSize(who){
+                    // alert(who.value);
+                    // 发送请求
+                    location.href="${ pageContext.request.contextPath }/allreaders.action?pageSize="+who.value + "&pageNum=" + ${ page.pageNum};
+                }
+            </script>
+        </div>
+
+        <div class="box-tools pull-right">
+            <ul class="pagination pagination-right">
+                <li><a href="javascript:sumbitPageNum(1)" aria-label="Previous">首页</a></li>
+                <li><a href="javascript:sumbitPageNum(${ page.pageNum - 1 })">上一页</a></li>
+                <c:forEach begin="1" end="${ page.pages }" var="i">
+                    <li><a href="javascript:sumbitPageNum(${ i })">${ i }</a></li>
+                </c:forEach>
+
+                <li><a href="javascript:sumbitPageNum(${ page.pageNum + 1 })">下一页</a></li>
+                <li><a href="javascript:sumbitPageNum(${ page.pages })" aria-label="Next">尾页</a></li>
+            </ul>
+        </div>
+
+        <script type="text/javascript">
+            /* 发送请求，传的参数当前页 */
+            function sumbitPageNum(pageNum){
+                if (pageNum > ${page.pages} ){
+                    pageNum = ${ page.pages };
+                }
+                if (pageNum < 1){
+                    pageNum = 1;
+                }
+
+                location.href="${ pageContext.request.contextPath }/allreaders.action?pageNum="+pageNum + "&pageSize=" + ${page.pageSize};
+            }
+        </script>
+
+    </div>
+
 </div>
+
+
 </body>
 </html>

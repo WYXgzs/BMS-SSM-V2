@@ -1,11 +1,12 @@
 package com.ryoeiken.bms.service;
 
 import com.ryoeiken.bms.pojo.BookInfo;
+import com.ryoeiken.bms.pojo.PageResult;
 
 import java.util.List;
 
 public interface BookService {
-    List<BookInfo> getAllBooks();
+    PageResult<BookInfo> getAllBooks(Integer pageNum, Integer pageSize);
 
     boolean matchBook(String searchWord);
 
