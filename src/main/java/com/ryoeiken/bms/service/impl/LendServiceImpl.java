@@ -33,7 +33,7 @@ public class LendServiceImpl implements LendService {
 
     @Override
     public PageResult<LendList> lendList(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<LendList> list = this.lendListMapper.selectByExample(null);
         PageInfo<LendList> pageInfo = new PageInfo<>(list);
         long total = pageInfo.getTotal();
@@ -79,8 +79,11 @@ public class LendServiceImpl implements LendService {
             BookInfoExample.Criteria criteria = bookInfoExample.createCriteria();
             criteria.andBookIdEqualTo(bookId);
 
+            Integer count = this.bookInfoMapper.selectByPrimaryKey(bookId).getCount();
+
             BookInfo bookInfo = new BookInfo();
             bookInfo.setState((short) 0);
+            bookInfo.setCount(count + 1);
             int updateSuc = this.bookInfoMapper.updateByExampleSelective(bookInfo, bookInfoExample);
 
             return addSuc > 0 && updateSuc > 0;

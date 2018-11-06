@@ -26,6 +26,8 @@ public class BookInfo {
 
     private Short state;
 
+    private Integer count;
+
     private String introduction;
 
     public Long getBookId() {
@@ -114,6 +116,14 @@ public class BookInfo {
 
     public void setState(Short state) {
         this.state = state;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public String getIntroduction() {

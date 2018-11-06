@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>${readercard.name}的主页主页</title>
@@ -55,6 +56,36 @@
         </div>
     </div>
 </nav>
+
+<div class="panel panel-default" style="width: 90%;margin-left: 5%">
+    <div class="panel-heading" style="background-color: #fff">
+        <h3 class="panel-title">
+            最受欢迎图书排行
+        </h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>书名</th>
+                <th>作者</th>
+                <th>出版社</th>
+                <th>借阅次数</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${books}" var="book">
+                <tr>
+                    <td><c:out value="${book.name}"></c:out></td>
+                    <td><c:out value="${book.author}"></c:out></td>
+                    <td><c:out value="${book.publish}"></c:out></td>
+                    <td><c:out value="${book.count}"></c:out></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

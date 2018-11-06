@@ -19,7 +19,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public PageResult<BookInfo> getAllBooks(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<BookInfo> books = this.bookInfoMapper.selectByExample(null);
         PageInfo<BookInfo> pageInfo = new PageInfo<>(books);
         long total = pageInfo.getTotal();
@@ -70,6 +70,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public int deleteBook(Long bookId) {
         return this.bookInfoMapper.deleteByPrimaryKey(bookId);
+    }
+
+    @Override
+    public List<BookInfo> bookRank() {
+        BookInfoExample bookInfoExample = new BookInfoExample();
+        bookInfoExample.setOrderByClause("count DESC LIMIT 5");
+
+        return this.bookInfoMapper.selectByExample(bookInfoExample);
     }
 
 }

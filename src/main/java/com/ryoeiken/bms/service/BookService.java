@@ -19,4 +19,6 @@ public interface BookService {
     boolean editBook(BookInfo bookInfo);
 
     int deleteBook(Long bookId);
+
+    List<BookInfo> bookRank();
 }

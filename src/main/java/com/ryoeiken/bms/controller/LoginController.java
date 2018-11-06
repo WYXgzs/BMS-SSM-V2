@@ -1,10 +1,13 @@
 package com.ryoeiken.bms.controller;
 
 import com.ryoeiken.bms.pojo.Admin;
+import com.ryoeiken.bms.pojo.BookInfo;
 import com.ryoeiken.bms.pojo.ReaderCard;
+import com.ryoeiken.bms.service.BookService;
 import com.ryoeiken.bms.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,11 +15,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class LoginController {
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private BookService bookService;
 
     //    登录页面
     @RequestMapping(value = {"/", "/login.action"})
@@ -62,13 +69,16 @@ public class LoginController {
     }
 
     @RequestMapping("/admin_main.action")
-    public String toAdminMain() {
-
+    public String toAdminMain(Model model) {
+        List<BookInfo> books = this.bookService.bookRank();
+        model.addAttribute("books", books);
         return "admin_main";
     }
 
     @RequestMapping("/reader_main.action")
-    public String toReaderMain() {
+    public String toReaderMain(Model model) {
+        List<BookInfo> books = this.bookService.bookRank();
+        model.addAttribute("books", books);
 
         return "reader_main";
     }
