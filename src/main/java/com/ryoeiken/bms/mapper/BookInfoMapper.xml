@@ -13,6 +13,7 @@
         <result column="class_id" property="classId" jdbcType="INTEGER"/>
         <result column="pressmark" property="pressmark" jdbcType="INTEGER"/>
         <result column="state" property="state" jdbcType="SMALLINT"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.ryoeiken.bms.pojo.BookInfo" extends="BaseResultMap">
         <result column="introduction" property="introduction" jdbcType="LONGVARCHAR"/>
@@ -78,8 +79,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    book_id, name, author, publish, ISBN, language, price, pubdate, class_id, pressmark, 
-    state
+    book_id, name, author, publish, ISBN, language, price, pubdate, class_id, pressmark,
+    state, count
   </sql>
     <sql id="Blob_Column_List">
     introduction
@@ -134,16 +135,16 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.ryoeiken.bms.pojo.BookInfo">
-    insert into book_info (book_id, name, author, 
-      publish, ISBN, language, 
-      price, pubdate, class_id, 
-      pressmark, state, introduction
-      )
-    values (#{bookId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{publish,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{pubdate,jdbcType=DATE}, #{classId,jdbcType=INTEGER}, 
-      #{pressmark,jdbcType=INTEGER}, #{state,jdbcType=SMALLINT}, #{introduction,jdbcType=LONGVARCHAR}
-      )
+    insert into book_info (book_id, name, author,
+      publish, ISBN, language,
+      price, pubdate, class_id,
+      pressmark, state, count,
+      introduction)
+    values (#{bookId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+      #{publish,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR},
+      #{price,jdbcType=DECIMAL}, #{pubdate,jdbcType=DATE}, #{classId,jdbcType=INTEGER},
+      #{pressmark,jdbcType=INTEGER}, #{state,jdbcType=SMALLINT}, #{count,jdbcType=INTEGER},
+      #{introduction,jdbcType=LONGVARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.ryoeiken.bms.pojo.BookInfo">
         insert into book_info
@@ -180,6 +181,9 @@
             </if>
             <if test="state != null">
                 state,
+            </if>
+            <if test="count != null">
+                count,
             </if>
             <if test="introduction != null">
                 introduction,
@@ -218,6 +222,9 @@
             </if>
             <if test="state != null">
                 #{state,jdbcType=SMALLINT},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
             </if>
             <if test="introduction != null">
                 #{introduction,jdbcType=LONGVARCHAR},
@@ -266,6 +273,9 @@
             <if test="record.state != null">
                 state = #{record.state,jdbcType=SMALLINT},
             </if>
+            <if test="record.count != null">
+                count = #{record.count,jdbcType=INTEGER},
+            </if>
             <if test="record.introduction != null">
                 introduction = #{record.introduction,jdbcType=LONGVARCHAR},
             </if>
@@ -287,6 +297,7 @@
         class_id = #{record.classId,jdbcType=INTEGER},
         pressmark = #{record.pressmark,jdbcType=INTEGER},
         state = #{record.state,jdbcType=SMALLINT},
+        count = #{record.count,jdbcType=INTEGER},
         introduction = #{record.introduction,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -304,7 +315,8 @@
         pubdate = #{record.pubdate,jdbcType=DATE},
         class_id = #{record.classId,jdbcType=INTEGER},
         pressmark = #{record.pressmark,jdbcType=INTEGER},
-        state = #{record.state,jdbcType=SMALLINT}
+        state = #{record.state,jdbcType=SMALLINT},
+        count = #{record.count,jdbcType=INTEGER}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -342,6 +354,9 @@
             <if test="state != null">
                 state = #{state,jdbcType=SMALLINT},
             </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
             <if test="introduction != null">
                 introduction = #{introduction,jdbcType=LONGVARCHAR},
             </if>
@@ -360,6 +375,7 @@
       class_id = #{classId,jdbcType=INTEGER},
       pressmark = #{pressmark,jdbcType=INTEGER},
       state = #{state,jdbcType=SMALLINT},
+      count = #{count,jdbcType=INTEGER},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where book_id = #{bookId,jdbcType=BIGINT}
   </update>
@@ -374,7 +390,8 @@
       pubdate = #{pubdate,jdbcType=DATE},
       class_id = #{classId,jdbcType=INTEGER},
       pressmark = #{pressmark,jdbcType=INTEGER},
-      state = #{state,jdbcType=SMALLINT}
+      state = #{state,jdbcType=SMALLINT},
+      count = #{count,jdbcType=INTEGER}
     where book_id = #{bookId,jdbcType=BIGINT}
   </update>
 </mapper>
