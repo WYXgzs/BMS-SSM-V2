@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-<div>
+<%--<div>--%>
     <nav style="position:fixed;z-index: 999;width: 100%;background-color: #fff" class="navbar navbar-default"
          role="navigation">
         <div class="container-fluid">
@@ -76,7 +76,27 @@
         </div>
     </nav>
 
-    <div class="panel panel-default" style="width: 90%;margin-left: 5%">
+<div style="position: relative;top: 8%">
+    <c:if test="${!empty succ}">
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">
+                &times;
+            </button>
+                ${succ}
+        </div>
+    </c:if>
+    <c:if test="${!empty error}">
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">
+                &times;
+            </button>
+                ${error}
+        </div>
+    </c:if>
+</div>
+    <div class="panel panel-default" style="position:relative;top: 80px;width: 90%;margin-left: 5%">
         <div class="panel-heading" style="background-color: #fff">
             <h3 class="panel-title">
                 最受欢迎图书排行
@@ -105,6 +125,6 @@
             </table>
         </div>
     </div>
-</div>
+<%--</div>--%>
 </body>
 </html>
