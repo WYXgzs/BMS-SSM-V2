@@ -20,6 +20,7 @@ public class BookController {
     @RequestMapping("/allbooks.action")
     public String allBook(Model model,@RequestParam(defaultValue="1")Integer pageNum,
                           @RequestParam(defaultValue="5")Integer pageSize) {
+
         PageResult<BookInfo> books = this.bookService.getAllBooks(pageNum, pageSize);
         model.addAttribute("books", books.getList());
         model.addAttribute("page",books);
