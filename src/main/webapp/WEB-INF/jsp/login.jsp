@@ -54,11 +54,11 @@
                 <label>
                     <input type="checkbox" id="remember">记住密码
                 </label>
-                <a style="float: right" href="#">忘记密码?</a>
+                <a style="float: right" href="register.action">读者注册</a>
             </div>
 
             <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
-            <button id="loginButton" class="btn btn-primary  btn-block">登陆
+            <button id="loginButton" class="btn btn-primary  btn-block">登录
             </button>
         </div>
     </div>
