@@ -46,6 +46,27 @@
                     <span class="input-group-addon">姓名</span>
                     <input type="text" class="form-control" name="name" id="name">
                 </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">性别</span>
+                    <input type="text" class="form-control" name="sex" id="sex">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">出生日期</span>
+                    <input type="text" class="form-control" name="birth" id="birth">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">地址</span>
+                    <input type="text" class="form-control" name="address" id="address">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon">电话</span>
+                    <input type="text" class="form-control" name="telcode" id="telcode">
+                </div>
+
                 <div class="input-group">
                     <span class="input-group-addon">密码</span>
                     <input type="password" class="form-control" name="passwd" id="passwd">
