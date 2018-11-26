@@ -7,8 +7,8 @@ Spring+SpringMVC+MyBatis 图书管理系统Demo
 使用Maven构建，整合SSM框架
 
 ### 修改
-- 优化样式
 - 添加添加读者注册
 - 添加借阅排行
 - 添加分页查询
-- 修复功能bug
+- 修复部分错误样式
+- 修复部分功能bug
