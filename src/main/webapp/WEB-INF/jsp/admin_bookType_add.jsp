@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: ryo
-  Date: 2018/10/31
-  Time: 19:34
+  Date: 2018/10/30
+  Time: 23:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>借阅《${book.name}》</title>
+    <title>增加图书类型</title>
     <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
     <script src="../../static/js/jquery-3.2.1.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
@@ -81,34 +81,32 @@
         </div>
     </div>
 </nav>
+
 <div class="col-xs-6 col-md-offset-3" style="position: relative;top: 25%">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">借阅《${book.name}》</h3>
+            <h3 class="panel-title">增加图书类型</h3>
         </div>
         <div class="panel-body">
-            <form action="lendbookdo.action?id=${book.bookId}" method="post" id="lendbook">
-                <input type="hidden" name="bookId" value="${book.bookId}"/>
+            <form action="bookType_add_do.action" method="post" id="bookTypeEdit">
                 <div class="input-group">
-                    <span class="input-group-addon">书名</span>
-                    <input type="text" readonly="readonly" class="form-control" name="name" id="name"
-                           value="${book.name}">
+                    <span class="input-group-addon">图书类型号</span>
+                    <input type="text" class="form-control" name="classId" id="classId">
                 </div>
-                <br/>
+
                 <div class="input-group">
-                    <span class="input-group-addon">读者证号</span>
-                    <input type="text" class="form-control" name="readerId" id="readerId" placeholder="借阅人读者证号">
+                    <span class="input-group-addon">图书类型名</span>
+                    <input type="text" class="form-control" name="className" id="className">
                 </div>
-                <br/>
-                <input type="submit" value="确定" class="btn btn-success btn-sm" class="text-left">
+                <input type="submit" value="添加" class="btn btn-success btn-sm" class="text-left">
                 <script>
                     function mySubmit(flag) {
                         return flag;
                     }
 
-                    $("#lendbook").submit(function () {
-                        if ($("#name").val() == '' || $("#readerId").val() == '') {
-                            alert("请输入读者证号！");
+                    $("#bookTypeEdit").submit(function () {
+                        if ($("#className").val() == '') {
+                            alert("请填入完整读者信息！");
                             return mySubmit(false);
                         }
                     })

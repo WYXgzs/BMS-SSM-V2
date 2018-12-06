@@ -46,6 +46,17 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        图书类型管理
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="allBookType.action">全部类型</a></li>
+                        <li class="divider"></li>
+                        <li><a href="bookType_add.action">增加图书类型</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         读者管理
                         <b class="caret"></b>
                     </a>
