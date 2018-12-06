@@ -39,7 +39,14 @@ public class BookServiceImpl implements BookService {
         BookInfoExample bookInfoExample = new BookInfoExample();
         BookInfoExample.Criteria criteria = bookInfoExample.createCriteria();
         criteria.andNameLike("%" + searchWord + "%");
-        return this.bookInfoMapper.countByExample(bookInfoExample) > 0;
+        try {
+            this.bookInfoMapper.countByExample(bookInfoExample);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     @Override
@@ -53,7 +60,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean addBook(BookInfo bookInfo) {
-        return this.bookInfoMapper.insertSelective(bookInfo) > 0;
+        try {
+            this.bookInfoMapper.insertSelective(bookInfo);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     @Override
@@ -64,7 +78,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean editBook(BookInfo bookInfo) {
-        return this.bookInfoMapper.updateByPrimaryKeySelective(bookInfo) > 0;
+        try {
+            this.bookInfoMapper.updateByPrimaryKeySelective(bookInfo);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

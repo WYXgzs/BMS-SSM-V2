@@ -50,7 +50,13 @@ public class LendServiceImpl implements LendService {
 
     @Override
     public boolean deleteLog(Long sernum) {
-        return this.lendListMapper.deleteByPrimaryKey(sernum) > 0;
+        try {
+            this.lendListMapper.deleteByPrimaryKey(sernum);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -58,7 +64,13 @@ public class LendServiceImpl implements LendService {
         LendListExample lendListExample = new LendListExample();
         LendListExample.Criteria criteria = lendListExample.createCriteria();
         criteria.andReaderIdEqualTo(searchWord);
-        return this.lendListMapper.countByExample(lendListExample) > 0;
+        try {
+            this.lendListMapper.countByExample(lendListExample);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 

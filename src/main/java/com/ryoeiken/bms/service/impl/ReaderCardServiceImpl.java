@@ -21,7 +21,13 @@ public class ReaderCardServiceImpl implements ReaderCardService {
         ReaderCardExample.Criteria criteria = readerCardExample.createCriteria();
         criteria.andReaderIdEqualTo(readerId);
 
-        return this.readerCardMapper.updateByExampleSelective(readerCard, readerCardExample) > 0;
+        try {
+            this.readerCardMapper.updateByExampleSelective(readerCard, readerCardExample);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -33,6 +39,12 @@ public class ReaderCardServiceImpl implements ReaderCardService {
         ReaderCardExample.Criteria criteria = readerCardExample.createCriteria();
         criteria.andReaderIdEqualTo(readerId);
 
-        return this.readerCardMapper.updateByExampleSelective(readerCard, readerCardExample) > 0;
+        try {
+            this.readerCardMapper.updateByExampleSelective(readerCard, readerCardExample);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
