@@ -35,7 +35,13 @@ public class ClassInfoServiceImpl implements BookTypeService {
 
     @Override
     public boolean deleteClassInfo(Integer readerId) {
-        return this.classInfoMapper.deleteByPrimaryKey(readerId) > 0;
+        try {
+            this.classInfoMapper.deleteByPrimaryKey(readerId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -45,11 +51,23 @@ public class ClassInfoServiceImpl implements BookTypeService {
 
     @Override
     public boolean editBookType(ClassInfo classInfo) {
-        return this.classInfoMapper.updateByPrimaryKeySelective(classInfo) > 0;
+        try {
+            this.classInfoMapper.updateByPrimaryKeySelective(classInfo);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean addBookType(ClassInfo classInfo) {
-        return this.classInfoMapper.insertSelective(classInfo) > 0;
+        try {
+            this.classInfoMapper.insertSelective(classInfo);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

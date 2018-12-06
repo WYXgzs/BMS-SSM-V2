@@ -3,7 +3,6 @@ package com.ryoeiken.bms.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ryoeiken.bms.mapper.ReaderInfoMapper;
-import com.ryoeiken.bms.pojo.BookInfo;
 import com.ryoeiken.bms.pojo.PageResult;
 import com.ryoeiken.bms.pojo.ReaderInfo;
 import com.ryoeiken.bms.service.ReaderInfoService;
@@ -19,7 +18,7 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
 
     @Override
     public PageResult<ReaderInfo> readerInfos(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<ReaderInfo> readerInfos = this.readerInfoMapper.selectByExample(null);
         PageInfo<ReaderInfo> pageInfo = new PageInfo<>(readerInfos);
         long total = pageInfo.getTotal();
@@ -46,11 +45,24 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
 
     @Override
     public boolean editReader(ReaderInfo readerInfo) {
-        return this.readerInfoMapper.updateByPrimaryKeySelective(readerInfo) > 0;
+        try {
+            this.readerInfoMapper.updateByPrimaryKeySelective(readerInfo);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     @Override
     public boolean addReader(ReaderInfo readerInfo) {
-        return this.readerInfoMapper.insertSelective(readerInfo) > 0;
+        try {
+            this.readerInfoMapper.insertSelective(readerInfo);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

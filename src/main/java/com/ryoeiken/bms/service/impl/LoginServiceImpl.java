@@ -2,7 +2,6 @@ package com.ryoeiken.bms.service.impl;
 
 import com.ryoeiken.bms.mapper.AdminMapper;
 import com.ryoeiken.bms.mapper.ReaderCardMapper;
-import com.ryoeiken.bms.mapper.ReaderInfoMapper;
 import com.ryoeiken.bms.pojo.Admin;
 import com.ryoeiken.bms.pojo.AdminExample;
 import com.ryoeiken.bms.pojo.ReaderCard;
@@ -25,8 +24,13 @@ public class LoginServiceImpl implements LoginService {
         ReaderCardExample.Criteria criteria = readerCardExample.createCriteria();
         criteria.andReaderIdEqualTo(id);
         criteria.andPasswdEqualTo(passwd);
-
-        return this.readerCardMapper.countByExample(readerCardExample) > 0;
+        try {
+            this.readerCardMapper.countByExample(readerCardExample);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -56,7 +60,13 @@ public class LoginServiceImpl implements LoginService {
     public boolean adminRePasswd(int id, String newPasswd) {
         Admin admin = this.adminMapper.selectByPrimaryKey(id);
         admin.setPassword(newPasswd);
-        return this.adminMapper.updateByPrimaryKeySelective(admin) > 0;
+        try {
+            this.adminMapper.updateByPrimaryKeySelective(admin);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 
     }
 }
